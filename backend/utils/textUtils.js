@@ -24,3 +24,7 @@ module.exports.justify = (text) => {
 
     return justifiedText.join('\n');
 };
+
+module.exports.countWords = (text) => {
+    return text.trim().split(' ').length;
+}
