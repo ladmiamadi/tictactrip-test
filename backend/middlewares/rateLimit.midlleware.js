@@ -2,6 +2,13 @@ const {countWords} = require("../utils/textUtils");
 
 const checkRateLimit = (req, res, next) => {
     const limit = 80000;
+
+    if (!req.is("text/plain")) {
+        return res.status(400).json({ error: "ContentType must be text/plain"});
+    }
+
+    if(req.body.trim() === '') res.status(400).json({error: "There is no text to justify"});
+
     const numberOfWords = countWords(req.body);
     const currentCount = parseInt(req.cookies.rateLimit) || 0;
 

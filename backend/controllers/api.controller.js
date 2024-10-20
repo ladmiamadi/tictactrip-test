@@ -17,7 +17,7 @@ module.exports.justifyText = (req, res) => {
     if(req.body.trim() === '') res.status(400).json({error: "There is no text to justify"});
 
     const text = req.body;
-    res.status(200).send(justify(text, 80));
+    res.status(200).send(justify(text));
 }
 
 module.exports.login = (req, res) => {
