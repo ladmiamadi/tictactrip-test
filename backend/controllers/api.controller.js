@@ -4,23 +4,39 @@ const jwt = require("jsonwebtoken");
 const {users} = require("../models/User");
 const duration = 24 * 60 * 60 * 1000;
 
+/**
+ * Generate a JWT for an authenticated user
+ * @param {Object } user
+ * @returns {string} The signed JWT token
+ */
 const createToken = (user) => {
     return jwt.sign(user, process.env.ACCESS_TOKEN, {
         expiresIn: duration
     });
 };
 
+/**
+ * justify a text for a given request
+ * @param {Object} req
+ * @param {Object} res
+ * @returns {*} justified text or error status
+ */
 module.exports.justifyText = (req, res) => {
-    if (!req.is("text/plain")) {
-        return res.status(400).json({ error: "ContentType must be text/plain"});
-    }
-
-    if(req.body.trim() === '') res.status(400).json({error: "There is no text to justify"});
-
     const text = req.body;
-    res.status(200).send(justify(text));
+
+    if (!req.is("text/plain")) return res.status(400).json({ error: "ContentType must be text/plain"});
+
+    if(text.trim() === '') return res.status(400).json({error: "There is no text to justify"});
+
+    return res.status(200).send(justify(text));
 }
 
+/**
+ * Check user and generate token
+ * @param {Object} req
+ * @param {Object} res
+ * @returns {*} status
+ */
 module.exports.login = (req, res) => {
     try {
         const data = req.body.email;
@@ -38,6 +54,6 @@ module.exports.login = (req, res) => {
             return res.status(401).json({error: "user not found"});
         }
     } catch (error) {
-        res.status(500).json({ error: 'Invalid token' });
+        return res.status(500).json({ error: 'Invalid token' });
     }
 }

@@ -1,4 +1,11 @@
 const jwt = require('jsonwebtoken');
+/**
+ * Check if a valid token exists in cookies
+ * @param {Object} req
+ * @param {Object} res
+ * @param {function} next
+ * @returns {*} error status or pass to the next middleware
+ */
 const checkToken = (req, res, next) => {
     const token = req.cookies.jwt
 
@@ -9,7 +16,7 @@ const checkToken = (req, res, next) => {
         req.email = verifiedToken.email;
         next();
     } catch (error) {
-        res.status(401).json({ error: 'Invalid token' });
+        return res.status(401).json({ error: 'Invalid token' });
     }
 };
 

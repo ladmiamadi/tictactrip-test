@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">54.16% </span>
+                <span class="strong">56.52% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>13/24</span>
+                <span class='fraction'>13/23</span>
             </div>
         
             
@@ -105,27 +105,59 @@
 <a name='L40'></a><a href='#L40'>40</a>
 <a name='L41'></a><a href='#L41'>41</a>
 <a name='L42'></a><a href='#L42'>42</a>
-<a name='L43'></a><a href='#L43'>43</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L43'></a><a href='#L43'>43</a>
+<a name='L44'></a><a href='#L44'>44</a>
+<a name='L45'></a><a href='#L45'>45</a>
+<a name='L46'></a><a href='#L46'>46</a>
+<a name='L47'></a><a href='#L47'>47</a>
+<a name='L48'></a><a href='#L48'>48</a>
+<a name='L49'></a><a href='#L49'>49</a>
+<a name='L50'></a><a href='#L50'>50</a>
+<a name='L51'></a><a href='#L51'>51</a>
+<a name='L52'></a><a href='#L52'>52</a>
+<a name='L53'></a><a href='#L53'>53</a>
+<a name='L54'></a><a href='#L54'>54</a>
+<a name='L55'></a><a href='#L55'>55</a>
+<a name='L56'></a><a href='#L56'>56</a>
+<a name='L57'></a><a href='#L57'>57</a>
+<a name='L58'></a><a href='#L58'>58</a>
+<a name='L59'></a><a href='#L59'>59</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
@@ -153,23 +185,39 @@ const jwt = require("jsonwebtoken");
 const {users} = require("../models/User");
 const duration = 24 * 60 * 60 * 1000;
 &nbsp;
+/**
+ * Generate a JWT for an authenticated user
+ * @param {Object } user
+ * @returns {string} The signed JWT token
+ */
 const createToken = <span class="fstat-no" title="function not covered" >(u</span>ser) =&gt; {
 <span class="cstat-no" title="statement not covered" >    return jwt.sign(user, process.env.ACCESS_TOKEN, {</span>
         expiresIn: duration
     });
 };
 &nbsp;
+/**
+ * justify a text for a given request
+ * @param {Object} req
+ * @param {Object} res
+ * @returns {*} justified text or error status
+ */
 module.exports.justifyText = <span class="fstat-no" title="function not covered" >(r</span>eq, res) =&gt; {
-<span class="cstat-no" title="statement not covered" >    if (!req.is("text/plain")) {</span>
-<span class="cstat-no" title="statement not covered" >        return res.status(400).json({ error: "ContentType must be text/plain"});</span>
-    }
-&nbsp;
-<span class="cstat-no" title="statement not covered" >    if(req.body.trim() === '') <span class="cstat-no" title="statement not covered" >res.status(400).json({error: "There is no text to justify"});</span></span>
-&nbsp;
     const text = <span class="cstat-no" title="statement not covered" >req.body;</span>
-<span class="cstat-no" title="statement not covered" >    res.status(200).send(justify(text));</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (!req.is("text/plain")) <span class="cstat-no" title="statement not covered" >return res.status(400).json({ error: "ContentType must be text/plain"});</span></span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if(text.trim() === '') <span class="cstat-no" title="statement not covered" >return res.status(400).json({error: "There is no text to justify"});</span></span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return res.status(200).send(justify(text));</span>
 }
 &nbsp;
+/**
+ * Check user and generate token
+ * @param {Object} req
+ * @param {Object} res
+ * @returns {*} status
+ */
 module.exports.login = (req, res) =&gt; {
     try {
         const data = req.body.email;
@@ -187,7 +235,7 @@ module.exports.login = (req, res) =&gt; {
             return res.status(401).json({error: "user not found"});
         }
     } catch (error) {
-<span class="cstat-no" title="statement not covered" >        res.status(500).json({ error: 'Invalid token' });</span>
+<span class="cstat-no" title="statement not covered" >        return res.status(500).json({ error: 'Invalid token' });</span>
     }
 }</pre></td></tr></table></pre>
 
@@ -196,7 +244,7 @@ module.exports.login = (req, res) =&gt; {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-10-21T09:30:19.108Z
+                at 2024-10-21T10:01:42.193Z
             </div>
         <script src="../prettify.js"></script>
         <script>
