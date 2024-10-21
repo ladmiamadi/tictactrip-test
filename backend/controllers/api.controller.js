@@ -3,6 +3,7 @@ const {justify} = require("../utils/textUtils");
 const jwt = require("jsonwebtoken");
 const {users} = require("../models/User");
 const duration = 24 * 60 * 60 * 1000;
+
 const createToken = (user) => {
     return jwt.sign(user, process.env.ACCESS_TOKEN, {
         expiresIn: duration
