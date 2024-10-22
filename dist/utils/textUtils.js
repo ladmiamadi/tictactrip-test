@@ -7,7 +7,7 @@
  */
 const justifyLine = (currentLine, lineLength) => {
     const totalWordsLength = currentLine.reduce((acc, word) => acc + word.length, 0);
-    let spaceToDistribute = lineLength - totalWordsLength;
+    const spaceToDistribute = lineLength - totalWordsLength;
     if (currentLine.length === 1)
         return currentLine[0].padEnd(lineLength);
     const spaceBetweenWords = Math.floor(spaceToDistribute / (currentLine.length - 1));
@@ -27,7 +27,7 @@ const justifyLine = (currentLine, lineLength) => {
 module.exports.justify = (text) => {
     const lineLength = 80;
     const paragraphs = text.split('\n').filter(line => line.trim() !== '');
-    let justifiedText = [];
+    const justifiedText = [];
     paragraphs.forEach(paragraph => {
         const words = paragraph.split(' ');
         let currentLine = [];
