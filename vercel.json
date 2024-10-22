@@ -1,0 +1,19 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "/backend/dist/server.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/$1"
+    }
+  ],
+  "env": {
+    "PORT": "5000",
+    "ACCESS_TOKEN": "5967d47f3707a745867b001971aa2044b415b6a91116cc240a2c5d3891372f0bbc757a67cdd84da24bd3144c3b17eb5b2b30c30042634b0d589d31014c7d3725"
+  }
+}
