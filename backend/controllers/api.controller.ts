@@ -1,3 +1,6 @@
+import {User} from "../models/interface";
+import { Request, Response } from "express";
+
 const {justify} = require("../utils/textUtils");
 
 const jwt = require("jsonwebtoken");
@@ -6,10 +9,10 @@ const duration = 24 * 60 * 60 * 1000;
 
 /**
  * Generate a JWT for an authenticated user
- * @param {Object } user
+ * @param {User} user
  * @returns {string} The signed JWT token
  */
-const createToken = (user) => {
+const createToken = (user: User) => {
     return jwt.sign(user, process.env.ACCESS_TOKEN, {
         expiresIn: duration
     });
@@ -17,11 +20,11 @@ const createToken = (user) => {
 
 /**
  * justify a text for a given request
- * @param {Object} req
- * @param {Object} res
+ * @param {Request} req
+ * @param {Response} res
  * @returns {*} justified text or error status
  */
-module.exports.justifyText = (req, res) => {
+module.exports.justifyText = (req: Request, res: Response) => {
     const text = req.body;
 
     if (!req.is("text/plain")) return res.status(400).json({ error: "ContentType must be text/plain"});
@@ -33,16 +36,16 @@ module.exports.justifyText = (req, res) => {
 
 /**
  * Check user and generate token
- * @param {Object} req
- * @param {Object} res
+ * @param {Request} req
+ * @param {Response} res
  * @returns {*} status
  */
-module.exports.login = (req, res) => {
+module.exports.login = (req: Request, res: Response) => {
     try {
         const data = req.body.email;
         const user = {email: data};
 
-        if(users.find(item => item.email === user.email)) {
+        if(users.find((item: User) => item.email === user.email)) {
             const token = createToken(user);
 
             res.cookie('jwt', token, {httpOnly: true, maxAge: duration});

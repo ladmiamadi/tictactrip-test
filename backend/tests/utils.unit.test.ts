@@ -1,3 +1,5 @@
+import {describe, expect, it} from '@jest/globals';
+
 const {justify, countWords, justifyLine} = require("../utils/textUtils")
 
 describe("Justify text test", () => {

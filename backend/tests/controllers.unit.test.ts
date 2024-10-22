@@ -1,8 +1,9 @@
+import {describe, expect, it, jest} from '@jest/globals';
+
 const {justifyText, login } = require("../controllers/api.controller");
 const {justify} = require( "../utils/textUtils");
 
 jest.mock('../utils/textUtils', () => ({
-    ...jest.requireActual('../utils/textUtils'),
     justify: jest.fn(),
 }));
 
@@ -28,7 +29,7 @@ describe('justify text function', () => {
     it('should return 400 if Content-Type is not text/plain', () => {
         const req = {
             is: jest.fn().mockReturnValue(false),
-            body: "Sample text"
+            body: "tictactrip"
         };
         const res = {
             status: jest.fn().mockReturnThis(),

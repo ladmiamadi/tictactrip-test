@@ -1,10 +1,10 @@
 /**
  * justify a given line as an array and return a justified text
- * @param {array} currentLine - the line split as words
+ * @param {string[]} currentLine - the line split as words
  * @param {number} lineLength
- * @returns {*|string} - The justified line as text
+ * @returns {string} - The justified line as text
  */
-const justifyLine = (currentLine, lineLength) => {
+const justifyLine = (currentLine: string[], lineLength: number) => {
     const totalWordsLength = currentLine.reduce((acc, word) => acc + word.length, 0);
     let spaceToDistribute = lineLength - totalWordsLength;
 
@@ -27,17 +27,17 @@ const justifyLine = (currentLine, lineLength) => {
  * @param {string} text - The given text
  * @returns {string}- the justified text
  */
-module.exports.justify = (text) => {
+module.exports.justify = (text: string) => {
     const lineLength = 80;
     const paragraphs = text.split('\n').filter(line => line.trim() !== '');
-    let justifiedText = [];
+    let justifiedText: string[] = [];
 
     paragraphs.forEach(paragraph => {
         const words = paragraph.split(' ');
-        let currentLine = [];
+        let currentLine: string[] = [];
 
         words.forEach(word => {
-            const currentLineLength = currentLine.join(' ').length;
+            const currentLineLength: number = currentLine.join(' ').length;
 
             if (currentLineLength + word.length + 1 <= lineLength) {
                 currentLine.push(word);
@@ -58,6 +58,6 @@ module.exports.justify = (text) => {
  * @param {string} text
  * @returns {number} - The number of words
  */
-module.exports.countWords = (text) => {
+module.exports.countWords = (text: string) => {
     return text.trim().split(' ').length;
 };

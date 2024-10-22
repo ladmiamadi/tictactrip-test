@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">53.84% </span>
+                <span class="strong">73.07% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>14/26</span>
-            </div>
-        
-            
-            <div class='fl pad1y space-right2'>
-                <span class="strong">16.66% </span>
-                <span class="quiet">Branches</span>
-                <span class='fraction'>1/6</span>
+                <span class='fraction'>19/26</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">50% </span>
-                <span class="quiet">Functions</span>
+                <span class="quiet">Branches</span>
                 <span class='fraction'>2/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">56.52% </span>
+                <span class="strong">75% </span>
+                <span class="quiet">Functions</span>
+                <span class='fraction'>3/4</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">73.91% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>13/23</span>
+                <span class='fraction'>17/23</span>
             </div>
         
             
@@ -121,7 +121,13 @@
 <a name='L56'></a><a href='#L56'>56</a>
 <a name='L57'></a><a href='#L57'>57</a>
 <a name='L58'></a><a href='#L58'>58</a>
-<a name='L59'></a><a href='#L59'>59</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L59'></a><a href='#L59'>59</a>
+<a name='L60'></a><a href='#L60'>60</a>
+<a name='L61'></a><a href='#L61'>61</a>
+<a name='L62'></a><a href='#L62'>62</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -145,13 +151,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -179,7 +185,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const {justify} = require("../utils/textUtils");
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import {User} from "../models/interface";
+import { Request, Response } from "express";
+&nbsp;
+const {justify} = require("../utils/textUtils");
 &nbsp;
 const jwt = require("jsonwebtoken");
 const {users} = require("../models/User");
@@ -187,10 +196,10 @@ const duration = 24 * 60 * 60 * 1000;
 &nbsp;
 /**
  * Generate a JWT for an authenticated user
- * @param {Object } user
+ * @param {User} user
  * @returns {string} The signed JWT token
  */
-const createToken = <span class="fstat-no" title="function not covered" >(u</span>ser) =&gt; {
+const createToken = <span class="fstat-no" title="function not covered" >(u</span>ser: User) =&gt; {
 <span class="cstat-no" title="statement not covered" >    return jwt.sign(user, process.env.ACCESS_TOKEN, {</span>
         expiresIn: duration
     });
@@ -198,32 +207,32 @@ const createToken = <span class="fstat-no" title="function not covered" >(u</spa
 &nbsp;
 /**
  * justify a text for a given request
- * @param {Object} req
- * @param {Object} res
+ * @param {Request} req
+ * @param {Response} res
  * @returns {*} justified text or error status
  */
-module.exports.justifyText = <span class="fstat-no" title="function not covered" >(r</span>eq, res) =&gt; {
-    const text = <span class="cstat-no" title="statement not covered" >req.body;</span>
+module.exports.justifyText = (req: Request, res: Response) =&gt; {
+    const text = req.body;
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    if (!req.is("text/plain")) <span class="cstat-no" title="statement not covered" >return res.status(400).json({ error: "ContentType must be text/plain"});</span></span>
+    if (!req.is("text/plain")) return res.status(400).json({ error: "ContentType must be text/plain"});
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    if(text.trim() === '') <span class="cstat-no" title="statement not covered" >return res.status(400).json({error: "There is no text to justify"});</span></span>
+    <span class="missing-if-branch" title="if path not taken" >I</span>if(text.trim() === '') <span class="cstat-no" title="statement not covered" >return res.status(400).json({error: "There is no text to justify"});</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    return res.status(200).send(justify(text));</span>
+    return res.status(200).send(justify(text));
 }
 &nbsp;
 /**
  * Check user and generate token
- * @param {Object} req
- * @param {Object} res
+ * @param {Request} req
+ * @param {Response} res
  * @returns {*} status
  */
-module.exports.login = (req, res) =&gt; {
+module.exports.login = (req: Request, res: Response) =&gt; {
     try {
         const data = req.body.email;
         const user = {email: data};
 &nbsp;
-        <span class="missing-if-branch" title="if path not taken" >I</span>if(users.find(item =&gt; item.email === user.email)) {
+        <span class="missing-if-branch" title="if path not taken" >I</span>if(users.find((item: User) =&gt; item.email === user.email)) {
             const token = <span class="cstat-no" title="statement not covered" >createToken(user);</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >            res.cookie('jwt', token, {httpOnly: true, maxAge: duration});</span>
@@ -244,7 +253,7 @@ module.exports.login = (req, res) =&gt; {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-10-21T10:01:42.193Z
+                at 2024-10-22T08:36:54.746Z
             </div>
         <script src="../prettify.js"></script>
         <script>
