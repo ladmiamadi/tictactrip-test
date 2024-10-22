@@ -1,15 +1,15 @@
 {
   "compilerOptions": {
-    "target": "ES2017",                  // Spécifie la version ECMAScript à générer
-    "module": "commonjs",              // Utilisation du module CommonJS (pour Node.js)
-    "outDir": "./dist",                // Dossier où seront placés les fichiers compilés
-    "rootDir": "./backend",                // Dossier source de vos fichiers TypeScript
-    "strict": true,                    // Active la vérification stricte des types
-    "esModuleInterop": true,           // Compatibilité avec les imports ES6
-    "moduleResolution": "node",        // Pour la résolution des modules dans Node.js
-    "skipLibCheck": true,              // Évite de vérifier les types dans les fichiers `.d.ts`
-    "forceConsistentCasingInFileNames": true // Imposer la cohérence des noms de fichiers
+    "target": "ES2017",
+    "module": "commonjs",
+    "outDir": "./dist",
+    "rootDir": "./backend",
+    "strict": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
   },
-  "include": ["backend"],                  // Inclut les fichiers sources à compiler
-  "exclude": ["node_modules", "dist"]  // Exclut ces dossiers de la compilation
+  "include": ["backend"],
+  "exclude": ["node_modules", "dist"]
 }
